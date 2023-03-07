@@ -1,9 +1,13 @@
+import Intro from "./components/Intro";
+import Questions from "./components/Questions";
+import Answers from "./components/Answers";
+
 function App() {
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold">
-        Hello world!
-      </h1>
+    <div className="app">
+      <Intro />
+      <Questions />
+      <Answers />
     </div>
   );
 }
