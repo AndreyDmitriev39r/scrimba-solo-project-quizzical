@@ -9,7 +9,7 @@ function App() {
   // styles
 
   const stylesApp = {
-    position: "h-full w-full",
+    sizing: "h-full w-full",
   }
 
   const stylesAppClassList = Object.values(stylesApp).join(" ");
