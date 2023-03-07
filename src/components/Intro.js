@@ -1,10 +1,18 @@
 function Intro({handleStartQuizClick}) {
 
   // styles
+
   // TODOs
-  // add google fonts
+
+  // primary
+  // add google fonts  
   // move styles in its own file
   // add corner blobs
+
+  // secondary
+  // add hover and active effects on button
+  // add box-shadow on button
+  // add text-shadow on main heading
 
   const styles = {
     intro: "h-full w-full flex flex-col justify-center items-center bg-white",
