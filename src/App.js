@@ -6,6 +6,14 @@ import Answers from "./components/Answers";
 
 function App() {
 
+  // styles
+
+  const stylesApp = {
+    position: "h-full w-full",
+  }
+
+  const stylesAppClassList = Object.values(stylesApp).join(" ");
+
   // state
 
   const [showPage, setShowPage] = useState(false);
@@ -15,7 +23,7 @@ function App() {
   }
 
   return (
-    <div className="app">
+    <div className={`app ${stylesAppClassList}`}>
       {!showPage &&
       <Intro
         handleStartQuizClick={handleStartQuizClick}
