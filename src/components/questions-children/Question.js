@@ -9,7 +9,7 @@ function Question({questionHeading, incorrectAnswers, correctAnswer}) {
     question: "mx-14 flex flex-col gap-3",
     question_heading: "text-base font-mono font-bold text-slate-700",
     question_options_wrapper: "flex flex-row flex-wrap gap-3",
-    divider: "",
+    divider: "border border-gray-300",
   }
 
   // helper functions
@@ -37,7 +37,7 @@ function Question({questionHeading, incorrectAnswers, correctAnswer}) {
       <div className={`questions-options-wrapper ${stylesQuestion.question_options_wrapper}`}>
         {optionsToRender}
       </div>
-      <hr className="divider"/>
+      <hr className={`divider ${stylesQuestion.divider}`}/>
     </div>
   );
 }
