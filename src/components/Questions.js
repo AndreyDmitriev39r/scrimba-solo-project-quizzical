@@ -1,9 +1,7 @@
 import Question from "./questions-children/Question";
 
 function Questions({questions}) {
-
-  // helper functions
-  console.log(questions);
+  
   // rendering
 
   const questionsToRender = questions.map(question =>
@@ -16,7 +14,7 @@ function Questions({questions}) {
   )
 
   return (
-    <div className="questions bg-blue-300">
+    <div className="questions">
       {questionsToRender}
     </div>
   );
