@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import Intro from "../components/Intro/Intro";
 import Questions from "../components/Questions/Questions";
@@ -19,18 +19,6 @@ import stylesApp from "./stylesApp";
   // add text-shadow on main heading 
 
 function App() {  
-
-  // fetching
-
-  const [questions, setQuestions] = useState({});
-
-  useEffect(() => {    
-    fetch('https://opentdb.com/api.php?amount=5')
-      .then(res => res.json())
-      .then(data => {        
-        setQuestions(data.results);         
-      });
-  }, []);
   
   // state
 
@@ -46,7 +34,7 @@ function App() {
       <Intro
         handleStartQuizClick={handleStartQuizClick}
       />}
-      {showPage && <Questions questions={questions}/>}      
+      {showPage && <Questions />}      
     </div>
   );
 }
