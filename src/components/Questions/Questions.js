@@ -6,19 +6,42 @@ import stylesQuestions from "./stylesQuestions";
 
 function Questions() {
 
+  // utils
+
+  const getRandomNumber = range => Math.floor(Math.random() * range);
+
+  const getAllAnswers = (incorrectAnswers, correctAnswer, indexToInsert) => {    
+    return [
+      ...incorrectAnswers.slice(0, indexToInsert),
+      correctAnswer,
+      ...incorrectAnswers.slice(indexToInsert)
+    ];
+  };
+
   // fetching
 
   const [isLoading, setIsLoading] = useState(() => false);
 
   const [showCheckBtn, setShowCheckBtn] = useState(() => false);
 
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState(() => []);
 
   useEffect(() => {    
     fetch('https://opentdb.com/api.php?amount=5')
       .then(res => res.json())
-      .then(data => {        
-        setQuestions(data.results);
+      .then(data => {       
+        setQuestions(
+          data.results.map(item => {
+            const indexToInsert = getRandomNumber(item.incorrect_answers.length + 1);
+            const allAnswers = getAllAnswers(item.incorrect_answers, item.correct_answer, indexToInsert);
+            return {
+              questionHeading: item.question,
+              allAnswers: allAnswers,
+              correctAnswerIndex: indexToInsert,
+              isCorrect: false,
+            }
+          })          
+        );        
         setIsLoading((prevIsLoading) => !prevIsLoading);   
       });  
   }, []);
@@ -26,7 +49,7 @@ function Questions() {
   // in order to delay render of the lower button - research for alternatives
   useEffect(() => {
     if (!isLoading) {
-      setShowCheckBtn((prevShowCheckBtn) => !prevShowCheckBtn);
+      setShowCheckBtn((prevShowCheckBtn) => !prevShowCheckBtn);      
     }    
   }, [isLoading])
   
@@ -34,14 +57,15 @@ function Questions() {
 
   const questionsToRender = questions.map(question =>
     <Question
-      key={question.question}    
-      questionHeading={question.question}
-      incorrectAnswers={question.incorrect_answers}
-      correctAnswer={question.correct_answer}
+      key={question.questionHeading}    
+      questionHeading={question.questionHeading}
+      allAnswers={question.allAnswers}
+      correctAnswerIndex={question.correctAnswerIndex}
+      isCorrect={question.isCorrect}
     />
-  )
+  )  
 
-  return (
+  return (    
     <div className={`questions ${stylesQuestions.questions}`}>
       {isLoading && <h1 className={`loading-message ${stylesQuestions.loading_message}`}>Wait a sec... loading stuff</h1>}
       {!isLoading && questionsToRender}

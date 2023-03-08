@@ -18,7 +18,7 @@ import stylesApp from "./stylesApp";
   // add box-shadow on button
   // add text-shadow on main heading 
 
-function App() {  
+function App() { 
   
   // state
 

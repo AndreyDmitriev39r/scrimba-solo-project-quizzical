@@ -1,6 +1,6 @@
 import stylesIntro from "./stylesIntro";
 
-function Intro({handleStartQuizClick}) {
+function Intro({handleStartQuizClick}) {  
   return (
     <div className={`intro ${stylesIntro.intro}`}>
       <h1 className={`intro-heading ${stylesIntro.intro_heading}`}>Quizzical</h1>

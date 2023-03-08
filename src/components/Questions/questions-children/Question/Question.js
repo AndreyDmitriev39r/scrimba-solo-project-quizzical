@@ -2,24 +2,11 @@ import Option from "../question-children/Option/Option";
 
 import stylesQuestion from "./stylesQuestion";
 
-function Question({questionHeading, incorrectAnswers, correctAnswer}) {
+function Question({questionHeading, allAnswers, correctAnswerIndex, isCorrect}) {  
   
-  // helper functions
-
-  const getRandomNumber = range => Math.floor(Math.random() * range);
-
-  const getOptions = (incorrectAnswers, correctAnswer) => {
-    const correctAnswerPosition = getRandomNumber(incorrectAnswers.length);
-    return [
-      ...incorrectAnswers.slice(0, correctAnswerPosition),
-      correctAnswer,
-      ...incorrectAnswers.slice(correctAnswerPosition)
-    ];
-  };
-
   // render
 
-  const optionsToRender = getOptions(incorrectAnswers, correctAnswer).map(optionText =>
+  const optionsToRender = allAnswers.map(optionText =>
     <Option key={optionText} optionText={optionText}/>
   )
 
