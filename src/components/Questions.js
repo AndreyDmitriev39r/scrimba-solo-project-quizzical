@@ -1,6 +1,13 @@
 import Question from "./questions-children/Question";
 
 function Questions({questions}) {
+
+  // styles
+
+  const stylesQuestions = {
+    questions: 'h-full w-full my-10 flex flex-col gap-4',
+    check_answers: "mt-1",
+  }
   
   // rendering
 
@@ -14,9 +21,11 @@ function Questions({questions}) {
   )
 
   return (
-    <div className="questions">
+    <div className={`questions ${stylesQuestions.questions}`}>
       {questionsToRender}
+      <button className={`check-answers ${stylesQuestions.check_answers}`}>Check Answers</button>
     </div>
+    
   );
 }
 
