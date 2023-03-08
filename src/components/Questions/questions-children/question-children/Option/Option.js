@@ -1,8 +1,11 @@
 import stylesOption from "./stylesOption";
 
-function Option({optionText}) {  
+function Option({optionText, handleOptionClick}) {  
   return (    
-    <button className={`option-btn ${stylesOption.option_btn}`}>{optionText}</button> 
+    <button
+      className={`option-btn ${stylesOption.option_btn}`}
+      onClick={handleOptionClick}
+    >{optionText}</button> 
   );
 }
 

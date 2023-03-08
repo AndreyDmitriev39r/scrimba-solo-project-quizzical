@@ -39,6 +39,7 @@ function Questions() {
               allAnswers: allAnswers,
               correctAnswerIndex: indexToInsert,
               isCorrect: false,
+              activeOption: null,              
             }
           })          
         );        
@@ -52,6 +53,15 @@ function Questions() {
       setShowCheckBtn((prevShowCheckBtn) => !prevShowCheckBtn);      
     }    
   }, [isLoading])
+
+  // event handlers
+
+  const handleOptionClick = (e) => {
+    console.log(e.target.innerText);
+    // if clicked option is not active - it should become active and all other options should become inactive
+    // should compare traget's inner text and correct answer - based on check - update isCorrect
+    // if clicked option is active - it should become inactive and isCorrect goes to false  
+  }
   
   // rendering
 
@@ -62,6 +72,8 @@ function Questions() {
       allAnswers={question.allAnswers}
       correctAnswerIndex={question.correctAnswerIndex}
       isCorrect={question.isCorrect}
+      activeOption={question.activeOption}
+      handleOptionClick={handleOptionClick}
     />
   )  
 

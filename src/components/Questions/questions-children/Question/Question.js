@@ -2,12 +2,12 @@ import Option from "../question-children/Option/Option";
 
 import stylesQuestion from "./stylesQuestion";
 
-function Question({questionHeading, allAnswers, correctAnswerIndex, isCorrect}) {  
+function Question({questionHeading, allAnswers, correctAnswerIndex, isCorrect, activeOption, handleOptionClick}) {  
   
   // render
 
   const optionsToRender = allAnswers.map(optionText =>
-    <Option key={optionText} optionText={optionText}/>
+    <Option key={optionText} optionText={optionText} handleOptionClick={handleOptionClick}/>
   )
 
   return (
