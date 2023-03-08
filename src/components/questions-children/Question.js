@@ -1,8 +1,17 @@
-function Question() {
+function Question({questionHeading, incorrectAnswers, correctAnswer}) {
+  console.log(incorrectAnswers)
+  console.log(correctAnswer)
+  // TO DO
+  // add helper function to bump correct answer in random position
+  // figure out &quot issue(see API docs)
   return (
-    <div className="questions bg-blue-300">
-      <h1>Question</h1>
-    </div>
+    <>
+      <h3 className="question-heading">{questionHeading}</h3>
+      <div className="questions-options-wrapper">
+
+      </div>
+      <br />
+    </>
   );
 }
 

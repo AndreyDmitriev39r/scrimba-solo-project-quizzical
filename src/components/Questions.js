@@ -2,13 +2,22 @@ import Question from "./questions-children/Question";
 
 function Questions({questions}) {
 
-  questions.forEach(element => {
-    console.log(element);
-  });
+  // helper functions
+  console.log(questions);
+  // rendering
+
+  const questionsToRender = questions.map(question =>
+    <Question
+      key={question.question}    
+      questionHeading={question.question}
+      incorrectAnswers={question.incorrect_answers}
+      correctAnswer={question.correct_answer}
+    />
+  )
 
   return (
     <div className="questions bg-blue-300">
-      <h1>Questions</h1>
+      {questionsToRender}
     </div>
   );
 }
