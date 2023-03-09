@@ -37,7 +37,7 @@ function Questions() {
             return {
               questionHeading: item.question,
               allAnswers: allAnswers,
-              correctAnswerIndex: indexToInsert,
+              correctAnswer: item.correct_answer,
               isCorrect: false,
               activeOption: null,              
             }
@@ -57,10 +57,23 @@ function Questions() {
   // event handlers
 
   const handleOptionClick = (e) => {
-    console.log(e.target.innerText);
-    // if clicked option is not active - it should become active and all other options should become inactive
-    // should compare traget's inner text and correct answer - based on check - update isCorrect
-    // if clicked option is active - it should become inactive and isCorrect goes to false  
+    console.log('option button clicked');    
+    const nextQuestions = questions.map(question => {      
+      if (e.target.name !== question.questionHeading) {
+        return question;
+      } else {        
+        if (e.target.innerText !== question.activeOption) {
+          return {...question,
+            activeOption: e.target.innerText,
+            isCorrect: e.target.innerText === question.correctAnswer ? true : false};
+        } else {
+          return {...question,
+            activeOption: null,
+            isCorrect: false};
+        }
+      }
+    });
+    setQuestions((prevQuestions) => nextQuestions);
   }
   
   // rendering
@@ -70,7 +83,7 @@ function Questions() {
       key={question.questionHeading}    
       questionHeading={question.questionHeading}
       allAnswers={question.allAnswers}
-      correctAnswerIndex={question.correctAnswerIndex}
+      correctAnswer={question.correctAnswer}
       isCorrect={question.isCorrect}
       activeOption={question.activeOption}
       handleOptionClick={handleOptionClick}
