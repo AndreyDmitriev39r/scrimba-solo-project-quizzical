@@ -82,9 +82,7 @@ function Questions() {
     <Question
       key={question.questionHeading}    
       questionHeading={question.questionHeading}
-      allAnswers={question.allAnswers}
-      correctAnswer={question.correctAnswer}
-      isCorrect={question.isCorrect}
+      allAnswers={question.allAnswers}      
       activeOption={question.activeOption}
       handleOptionClick={handleOptionClick}
     />

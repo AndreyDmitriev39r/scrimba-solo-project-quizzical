@@ -2,7 +2,7 @@ import Option from "../question-children/Option/Option";
 
 import stylesQuestion from "./stylesQuestion";
 
-function Question({questionHeading, allAnswers, correctAnswer, isCorrect, activeOption, handleOptionClick}) {  
+function Question({questionHeading, allAnswers, activeOption, handleOptionClick}) {  
   
   // render
 
@@ -11,7 +11,9 @@ function Question({questionHeading, allAnswers, correctAnswer, isCorrect, active
       key={optionText}
       optionFor={questionHeading}
       optionText={optionText}
-      handleOptionClick={handleOptionClick}/>
+      handleOptionClick={handleOptionClick}
+      activeOption={activeOption}
+    />
   )
 
   return (
