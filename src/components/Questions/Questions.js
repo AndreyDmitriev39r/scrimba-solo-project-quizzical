@@ -18,13 +18,19 @@ function Questions() {
     ];
   };
 
-  // fetching
+  // state
 
   const [isLoading, setIsLoading] = useState(() => false);
 
-  const [showCheckBtn, setShowCheckBtn] = useState(() => false);
+  const [showCheckBtn, setShowCheckBtn] = useState(() => false);  
+
+  const [isSummary, setIsSummary] = useState(() => false);
+
+  const [answeredCorrectly, setAnsweredCorrectly] = useState(() => 0);
 
   const [questions, setQuestions] = useState(() => []);
+
+  // fetching
 
   useEffect(() => {    
     fetch('https://opentdb.com/api.php?amount=5')
@@ -39,7 +45,7 @@ function Questions() {
               allAnswers: allAnswers,
               correctAnswer: item.correct_answer,
               isCorrect: false,
-              activeOption: null,              
+              activeOption: null,                            
             }
           })          
         );        
@@ -75,6 +81,20 @@ function Questions() {
     });
     setQuestions((prevQuestions) => nextQuestions);
   }
+
+  const handleCheckAnswersClick = (e) => {
+    console.log('checkanswers button clicked');      
+      // refactor UI space's CSS where it should be mounted - ?additional flex item
+    // conditionally mount confetti component IF all answers are correct
+      // set up state
+      // install depend-y
+    // change text content inside check answers to `try again`
+    setAnsweredCorrectly(questions
+      .reduce((counter, question) => question.isCorrect ? counter + 1 : counter, 0));
+    setIsSummary((prevIsSummary) => !prevIsSummary);
+    // LATER
+    // add resetting functionality
+  }
   
   // rendering
 
@@ -84,17 +104,24 @@ function Questions() {
       questionHeading={question.questionHeading}
       allAnswers={question.allAnswers}      
       activeOption={question.activeOption}
-      handleOptionClick={handleOptionClick}
+      correctAnswer={question.correctAnswer}
+      isSummary={isSummary}
+      handleOptionClick={handleOptionClick}      
     />
   )  
 
   return (    
     <div className={`questions ${stylesQuestions.questions}`}>
-      {isLoading && <h1 className={`loading-message ${stylesQuestions.loading_message}`}>Wait a sec... loading stuff</h1>}
+      {isLoading &&
+      <h1 className={`loading-message ${stylesQuestions.loading_message}`}>Wait a sec... loading stuff</h1>}
       {!isLoading && questionsToRender}
-      {showCheckBtn && <button className={`check-answers ${stylesQuestions.check_answers}`}>Check Answers</button>}
-    </div>
-    
+      {showCheckBtn &&
+      <button
+        className={`check-answers ${stylesQuestions.check_answers}`}
+        onClick={handleCheckAnswersClick}
+      >Check Answers</button>}
+      {isSummary && <p className={`summary`}>You answered {answeredCorrectly} questions correctly</p>}
+    </div>    
   );
 }
 
