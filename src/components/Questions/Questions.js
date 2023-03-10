@@ -37,17 +37,17 @@ function Questions() {
   // fetching
 
   useEffect(() => {    
-    fetch('https://opentdb.com/api.php?amount=5')
+    fetch('https://opentdb.com/api.php?amount=5&encode=url3986')
       .then(res => res.json())
       .then(data => {       
         setQuestions(
-          data.results.map(item => {
+          data.results.map(item => {            
             const indexToInsert = getRandomNumber(item.incorrect_answers.length + 1);
             const allAnswers = getAllAnswers(item.incorrect_answers, item.correct_answer, indexToInsert);
             return {
-              questionHeading: item.question,
-              allAnswers: allAnswers,
-              correctAnswer: item.correct_answer,
+              questionHeading: decodeURIComponent(item.question),
+              allAnswers: allAnswers.map(answer => decodeURIComponent(answer)),
+              correctAnswer: decodeURIComponent(item.correct_answer),
               isCorrect: false,
               activeOption: null,                            
             }

@@ -7,14 +7,12 @@ import stylesApp from "./stylesApp";
 
 // TO DOs
 
-// primary
-  // fix &quot and such - see API docs
+// primary  
   // add google fonts  
-  // move stylesIntro in its own file
   // add corner blobs
 
   // secondary
-  // add hover and active effects on button
+  // add active effects on button
   // add box-shadow on button
   // add text-shadow on main heading 
 
