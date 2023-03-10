@@ -8,7 +8,6 @@ import stylesApp from "./stylesApp";
 // TO DOs
 
 // primary  
-  // add google fonts  
   // add corner blobs
 
   // secondary
