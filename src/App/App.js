@@ -10,9 +10,7 @@ import stylesApp from "./stylesApp";
 // primary  
   // add corner blobs
 
-  // secondary
-  // add active effects on button
-  // add box-shadow on button
+  // secondary  
   // add text-shadow on main heading 
 
 function App() { 
