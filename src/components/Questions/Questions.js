@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import Confetti from "react-confetti";
+
 import Question from "./questions-children/Question/Question";
 
 import stylesQuestions from "./stylesQuestions";
@@ -27,6 +29,8 @@ function Questions() {
   const [isSummary, setIsSummary] = useState(() => false);
 
   const [answeredCorrectly, setAnsweredCorrectly] = useState(() => 0);
+
+  const [isConfetti, setIsConfetti] = useState(() => false);
 
   const [questions, setQuestions] = useState(() => []);
 
@@ -62,8 +66,7 @@ function Questions() {
 
   // event handlers
 
-  const handleOptionClick = (e) => {
-    console.log('option button clicked');    
+  const handleOptionClick = (e) => {    
     const nextQuestions = questions.map(question => {      
       if (e.target.name !== question.questionHeading) {
         return question;
@@ -82,16 +85,13 @@ function Questions() {
     setQuestions((prevQuestions) => nextQuestions);
   }
 
-  const handleCheckAnswersClick = (e) => {
-    console.log('checkanswers button clicked');      
-      // refactor UI space's CSS where it should be mounted - ?additional flex item
-    // conditionally mount confetti component IF all answers are correct
-      // set up state
-      // install depend-y
+  const handleCheckAnswersClick = (e) => {    
     // change text content inside check answers to `try again`
-    setAnsweredCorrectly(questions
-      .reduce((counter, question) => question.isCorrect ? counter + 1 : counter, 0));
+    const score = questions
+      .reduce((counter, question) => question.isCorrect ? counter + 1 : counter, 0)
+    setAnsweredCorrectly(score);
     setIsSummary((prevIsSummary) => !prevIsSummary);
+    if (score === 5) {setIsConfetti(true);}
     // LATER
     // add resetting functionality
   }
@@ -112,15 +112,18 @@ function Questions() {
 
   return (    
     <div className={`questions ${stylesQuestions.questions}`}>
+      {isConfetti && <Confetti />}
       {isLoading &&
       <h1 className={`loading-message ${stylesQuestions.loading_message}`}>Wait a sec... loading stuff</h1>}
       {!isLoading && questionsToRender}
-      {showCheckBtn &&
-      <button
-        className={`check-answers ${stylesQuestions.check_answers}`}
-        onClick={handleCheckAnswersClick}
-      >Check Answers</button>}
-      {isSummary && <p className={`summary`}>You answered {answeredCorrectly} questions correctly</p>}
+      <div className={`check-container ${stylesQuestions.check_container}`}>
+        {isSummary && <p className={`summary ${stylesQuestions.summary}`}>{`You scored ${answeredCorrectly}/5 correct answers`}</p>}
+        {showCheckBtn &&
+        <button
+          className={`check-answers ${stylesQuestions.check_answers}`}
+          onClick={handleCheckAnswersClick}
+        >Check Answers</button>}        
+      </div>
     </div>    
   );
 }
