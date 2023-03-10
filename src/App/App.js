@@ -9,9 +9,7 @@ import stylesApp from "./stylesApp";
 
 // primary  
   // add corner blobs
-
-  // secondary  
-  // add text-shadow on main heading 
+  // add try-catch to fetching block
 
 function App() { 
   
